@@ -15,16 +15,11 @@ router.post('/hash', (req,res)=> {
   //read a password from the body 
   //hash the password 
   //return it to the user in an object that looks like {password: 'original password', hash: 'hashed password'}
-  let { username, password } = req.body;
+  let password = req.body.password;
 
-  const credentials = req.body;
-  const hash = bcrypt.hashSync(credentials.password, 14)
-  credentials.password = hash;
+  const hash = bcrypt.hashSync(password, 14)
+
+  res.status(200).json({password, hash})
   
-  if (!user || !bcrypt.compareSync(credentials.password, user.password)) {
-    return res.status(401).json({ error: 'Incorrect credentials' });
-  }
-
-
 })
 module.exports = router;
