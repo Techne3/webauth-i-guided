@@ -13,13 +13,13 @@ router.get('/', (req, res) => {
 
 router.post('/hash', (req,res)=> {
   //read a password from the body 
-  //hash the password 
-  //return it to the user in an object that looks like {password: 'original password', hash: 'hashed password'}
   let password = req.body.password;
-
-  const hash = bcrypt.hashSync(password, 14)
-
-  res.status(200).json({password, hash})
   
+  //return it to the user in an object that looks like {password: 'original password', hash: 'hashed password'}
+  const hash = bcrypt.hashSync(password, 14)
+  
+  //hash the password 
+  res.status(200).json({password, hash})
+
 })
 module.exports = router;
